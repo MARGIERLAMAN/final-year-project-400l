@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduCache</title>
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#3a7d44"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="EduCache"/>
+  <link rel="apple-touch-icon" href="icons/icon-192.png"/>
+  <link rel="stylesheet" href="home.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">E</div>
+      <span>EduCache</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </a>
+      <a href="#" class="nav-item" data-section="browse">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Browse
+      </a>
+      <a href="#" class="nav-item" data-section="downloads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Downloads
+      </a>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-avatar" id="sidebarAvatar">--</div>
+      <div class="user-info">
+        <span class="user-name"  id="sidebarName">…</span>
+        <span class="user-class" id="sidebarClass">…</span>
+      </div>
+    </div>
+    <button class="logout-btn" id="logoutBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Log out
+    </button>
+  </aside>
+
+  <!-- MOBILE TOPBAR -->
+  <header class="mobile-topbar">
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <span class="mobile-logo">EduCache</span>
+    <div class="mobile-avatar" id="mobileAvatar">--</div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <p class="hero-eyebrow" id="heroGreeting">Welcome 👋</p>
+      <h1 class="hero-title">What are you <em>studying</em> today?</h1>
+      <p class="hero-sub">All your resources, right here — no data needed.</p>
+
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Search subjects, topics, past questions…" autocomplete="off"/>
+        <button class="search-btn" id="searchBtn">Search</button>
+      </div>
+
+      <div class="filter-chips">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="SHS 1">SHS 1</button>
+        <button class="chip" data-filter="SHS 2">SHS 2</button>
+        <button class="chip" data-filter="SHS 3">SHS 3</button>
+        <button class="chip" data-filter="Past Questions">Past Questions</button>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-strip" id="statsStrip">
+      <div class="stat-card"><span class="stat-num" id="statTotal">0</span><span class="stat-label">Resources</span></div>
+      <div class="stat-card"><span class="stat-num" id="statSubjects">0</span><span class="stat-label">Subjects</span></div>
+      <div class="stat-card"><span class="stat-num" id="statPQ">0</span><span class="stat-label">Past Questions</span></div>
+      <div class="stat-card"><span class="stat-num" id="statNew">0</span><span class="stat-label">New This Week</span></div>
+    </section>
+
+    <!-- SUBJECTS -->
+    <section class="section">
+      <div class="section-header"><h2>Browse by Subject</h2></div>
+      <div class="subjects-grid" id="subjectsGrid"></div>
+    </section>
+
+    <!-- RESOURCES -->
+    <section class="section">
+      <div class="section-header"><h2>Available Resources</h2></div>
+      <div class="resources-list" id="resourcesList"></div>
+    </section>
+
+  </main>
+
+  <!-- DOWNLOAD MODAL -->
+  <div class="modal-backdrop" id="dlModal" style="display:none">
+    <div class="modal">
+      <div class="modal-icon">📄</div>
+      <h3 id="dlTitle">Resource Title</h3>
+      <p id="dlMeta" style="color:var(--muted);font-size:.8rem;margin-bottom:16px"></p>
+      <p id="dlDesc" style="color:var(--text);font-size:.85rem;margin-bottom:20px"></p>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="dlCancel">Close</button>
+        <button class="btn-primary"   id="dlConfirm">⬇ Download</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="db.js"></script>
+  <script src="home.js"></script>
+</body>
+</html>

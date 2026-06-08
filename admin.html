@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduCache — Admin</title>
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#3a7d44"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-title" content="EduCache Admin"/>
+  <link rel="apple-touch-icon" href="icons/icon-192.png"/>
+  <link rel="stylesheet" href="admin.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">E</div>
+      <span>EduCache</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="./final-year-project-400l/home.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Student View
+      </a>
+      <a href="#upload" class="nav-item active" id="navUpload">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload Resource
+      </a>
+      <a href="#manage" class="nav-item" id="navManage">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Manage Resources
+      </a>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-avatar" id="sidebarAvatar">MB</div>
+      <div class="user-info">
+        <span class="user-name"  id="sidebarName">Mr. Boateng</span>
+        <span class="user-class">Administrator</span>
+      </div>
+    </div>
+    <button class="logout-btn" id="logoutBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Log out
+    </button>
+  </aside>
+
+  <!-- MOBILE TOPBAR -->
+  <header class="mobile-topbar">
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <span class="mobile-logo">Admin Panel</span>
+    <div class="mobile-avatar" id="mobileAvatar">MB</div>
+  </header>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Resource Manager</h1>
+        <p class="page-sub">Upload files for students, or remove outdated content.</p>
+      </div>
+      <div class="header-stats">
+        <div class="hstat"><span id="statTotal">0</span>Total</div>
+        <div class="hstat amber"><span id="statNew">0</span>This week</div>
+      </div>
+    </div>
+
+    <!-- ── UPLOAD SECTION ── -->
+    <section class="card" id="uploadSection">
+      <h2 class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;vertical-align:middle;margin-right:6px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload New Resource
+      </h2>
+
+      <!-- Dropzone -->
+      <div class="dropzone" id="dropzone">
+        <div class="dz-icon">📂</div>
+        <p class="dz-label">Drag & drop a file here, or <span class="dz-link" id="dzLink">browse files</span></p>
+        <p class="dz-hint">PDF, DOC, DOCX, PPT, PPTX, MP4 &nbsp;·&nbsp; Max 50 MB</p>
+        <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.ppt,.pptx,.mp4" style="display:none"/>
+      </div>
+
+      <!-- File preview -->
+      <div class="file-preview" id="filePreview" style="display:none">
+        <span class="fp-icon" id="fpIcon">📄</span>
+        <div class="fp-info">
+          <span class="fp-name" id="fpName">—</span>
+          <span class="fp-size" id="fpSize">—</span>
+        </div>
+        <button class="fp-remove" id="fpRemove">✕</button>
+      </div>
+
+      <!-- Metadata -->
+      <div class="meta-grid">
+        <div class="form-group">
+          <label>Resource Title *</label>
+          <input type="text" id="resTitle" placeholder="e.g. Core Maths Past Questions 2024"/>
+        </div>
+        <div class="form-group">
+          <label>Subject *</label>
+          <select id="resSubject">
+            <option value="">Select subject…</option>
+            <option>Mathematics</option><option>English</option><option>Science</option>
+            <option>Social Studies</option><option>Elective Mathematics</option>
+            <option>Physics</option><option>Chemistry</option><option>Biology</option>
+            <option>History</option><option>Economics</option><option>Literature</option><option>ICT</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Class *</label>
+          <select id="resClass">
+            <option value="">Select class…</option>
+            <option>SHS 1</option><option>SHS 2</option><option>SHS 3</option><option>All Classes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Category *</label>
+          <select id="resCategory">
+            <option value="">Select category…</option>
+            <option>Past Questions</option><option>Notes</option>
+            <option>Textbook</option><option>Worksheet</option><option>Video Lesson</option>
+          </select>
+        </div>
+        <div class="form-group span2">
+          <label>Description <span class="opt">(optional)</span></label>
+          <textarea id="resDesc" placeholder="Brief description for students…" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-wrap" id="progressWrap" style="display:none">
+        <div class="progress-bar" id="progressBar"></div>
+        <span class="progress-label" id="progressLabel">Saving…</span>
+      </div>
+
+      <!-- Error -->
+      <div class="form-error" id="formError" style="display:none"></div>
+
+      <!-- Actions -->
+      <div class="upload-actions">
+        <button class="btn-secondary" id="resetBtn">Clear</button>
+        <button class="btn-primary"   id="uploadBtn">
+          <span id="upBtnText">Upload Resource</span>
+          <span id="upSpinner" class="spinner" style="display:none"></span>
+        </button>
+      </div>
+
+      <div class="upload-success" id="uploadSuccess" style="display:none">
+        ✅ Resource uploaded! Students can now download it.
+      </div>
+    </section>
+
+    <!-- ── MANAGE SECTION ── -->
+    <section class="card" id="manageSection">
+      <div class="manage-header">
+        <h2 class="card-title" style="margin-bottom:0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;vertical-align:middle;margin-right:6px"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          All Resources
+        </h2>
+        <div class="manage-controls">
+          <input  type="text" id="manageSearch"  class="manage-search"  placeholder="Search…"/>
+          <select id="manageFilter" class="manage-filter">
+            <option value="all">All Subjects</option>
+            <option>Mathematics</option><option>English</option><option>Science</option>
+            <option>Social Studies</option><option>Physics</option><option>Chemistry</option>
+            <option>Biology</option><option>ICT</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="resource-table">
+          <thead>
+            <tr>
+              <th>Title</th><th>Subject</th><th>Class</th>
+              <th>Category</th><th>Size</th><th>Date</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="resourceTableBody"></tbody>
+        </table>
+        <div class="table-empty" id="tableEmpty" style="display:none">No resources found.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- DELETE MODAL -->
+  <div class="modal-backdrop" id="deleteModal" style="display:none">
+    <div class="modal">
+      <div style="font-size:2rem;margin-bottom:12px">🗑️</div>
+      <h3>Delete this resource?</h3>
+      <p id="deleteModalMsg" style="margin:8px 0 20px;color:var(--muted);font-size:.85rem"></p>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="deleteCancel">Cancel</button>
+        <button class="btn-danger"    id="deleteConfirm">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="db.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduCache — Login</title>
+  <link rel="manifest" href="manifest.json"/>
+  <meta name="theme-color" content="#3a7d44"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="EduCache"/>
+  <link rel="apple-touch-icon" href="icons/icon-192.png"/>
+  <link rel="stylesheet" href="login.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+
+  <div class="login-wrapper">
+    <!-- LEFT -->
+    <div class="login-left">
+      <div class="brand">
+        <div class="logo-mark">E</div>
+        <span class="brand-name">EduCache</span>
+      </div>
+      <h1 class="left-title">Your school's knowledge, always within reach.</h1>
+      <p class="left-sub">Access study materials, past questions and notes directly on the school network. No internet. No data bundle.</p>
+      <ul class="feature-list">
+        <li><span class="feat-icon">📚</span><span>Curated resources per subject</span></li>
+        <li><span class="feat-icon">⚡</span><span>Instant offline downloads</span></li>
+        <li><span class="feat-icon">🔒</span><span>Secure student login</span></li>
+      </ul>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="login-right">
+      <div class="login-card">
+        <h2 class="card-title">Sign in</h2>
+        <p class="card-sub">Use your school ID and assigned password</p>
+
+        <div class="error-banner" id="errorBanner" style="display:none"></div>
+
+        <div class="role-tabs">
+          <button class="role-tab active" data-role="student">Student</button>
+          <button class="role-tab" data-role="admin">Admin</button>
+        </div>
+
+        <div class="form-group">
+          <label for="schoolId">School ID</label>
+          <input type="text" id="schoolId" placeholder="e.g. STU-2024-001" autocomplete="username"/>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password"/>
+            <button type="button" class="pw-toggle" id="pwToggle" aria-label="Toggle password">
+              <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button class="login-btn" id="loginBtn">
+          <span id="btnText">Sign In</span>
+          <span id="btnSpinner" class="spinner" style="display:none"></span>
+        </button>
+
+        <p class="hint-text">Forgot credentials? Visit the IT office.</p>
+
+        <div class="demo-box">
+          <p class="demo-title">Demo credentials</p>
+          <p>Student → <code>STU-2024-001</code> / <code>student123</code></p>
+          <p>Admin &nbsp; → <code>ADM-0001</code> &nbsp;&nbsp; / <code>admin123</code></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="db.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
