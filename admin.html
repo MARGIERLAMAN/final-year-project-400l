@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-title" content="EduCache Admin"/>
   <link rel="apple-touch-icon" href="icons/icon-192.png"/>
-  <link rel="stylesheet" href="admin.css"/>
+  <link rel="stylesheet" href="css/admin.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
@@ -21,7 +21,7 @@
       <span>EduCache</span>
     </div>
     <nav class="sidebar-nav">
-      <a href="./final-year-project-400l/home.html" class="nav-item">
+      <a href="home.html" class="nav-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Student View
       </a>
@@ -80,7 +80,7 @@
       <!-- Dropzone -->
       <div class="dropzone" id="dropzone">
         <div class="dz-icon">📂</div>
-        <p class="dz-label">Drag & drop a file here, or <span class="dz-link" id="dzLink">browse files</span></p>
+        <p class="dz-label">Drag &amp; drop a file here, or <span class="dz-link" id="dzLink">browse files</span></p>
         <p class="dz-hint">PDF, DOC, DOCX, PPT, PPTX, MP4 &nbsp;·&nbsp; Max 50 MB</p>
         <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.ppt,.pptx,.mp4" style="display:none"/>
       </div>
@@ -205,7 +205,7 @@
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
-  <script src="db.js"></script>
-  <script src="admin.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/admin.js"></script>
 </body>
 </html>

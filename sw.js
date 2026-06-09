@@ -4,23 +4,24 @@
    Uploaded files live in IndexedDB — not the cache.
    ============================================================ */
 
-const CACHE = 'educache-v1';
+const CACHE = 'educache-v2';
 
 const SHELL = [
-  './final-year-project-400l/',
-  './final-year-project-400l/login.html',
-  './final-year-project-400l/login.css',
-  './final-year-project-400l/login.js',
-  './final-year-project-400l/home.html',
-  './final-year-project-400l/home.css',
-  './final-year-project-400l/home.js',
-  './final-year-project-400l/admin.html',
-  './final-year-project-400l/admin.css',
-  './final-year-project-400l/admin.js',
-  './final-year-project-400l/db.js',
-  './final-year-project-400l/manifest.json',
-  './final-year-project-400l/icons/icon-192.svg',
-  './final-year-project-400l/icons/icon-512.svg',
+  './',
+  './index.html',
+  './login.html',
+  './home.html',
+  './admin.html',
+  './css/login.css',
+  './css/home.css',
+  './css/admin.css',
+  './js/db.js',
+  './js/login.js',
+  './js/home.js',
+  './js/admin.js',
+  './manifest.json',
+  './icons/icon-192.svg',
+  './icons/icon-512.svg',
   'https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap',
 ];
 
@@ -40,22 +41,20 @@ self.addEventListener('activate', e => {
   );
 });
 
-// Fetch — cache-first for shell, network-first for Google Fonts
+// Fetch — cache-first for shell, pass-through for everything else
 self.addEventListener('fetch', e => {
   if (e.request.url.startsWith('chrome-extension')) return;
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;
       return fetch(e.request).then(res => {
-        // Cache valid same-origin responses
         if (res && res.status === 200 && res.type === 'basic') {
           const clone = res.clone();
           caches.open(CACHE).then(c => c.put(e.request, clone));
         }
         return res;
       }).catch(() => {
-        // Offline fallback for navigation
-        if (e.request.mode === 'navigate') return caches.match('./final-year-project-400l/login.html');
+        if (e.request.mode === 'navigate') return caches.match('./login.html');
       });
     })
   );

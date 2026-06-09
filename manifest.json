@@ -2,7 +2,7 @@
   "name": "EduCache",
   "short_name": "EduCache",
   "description": "SHS Offline Resource Hub — no internet needed",
-  "start_url": "./final-year-project-400l/login.html",
+  "start_url": "./login.html",
   "display": "standalone",
   "background_color": "#0f1a14",
   "theme_color": "#3a7d44",
